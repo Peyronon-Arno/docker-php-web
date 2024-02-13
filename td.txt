@@ -1,0 +1,11 @@
+Pour cette partie de td, nous avons écrit un docker-compose.yml ainsi qu'un Dockerfile
+Nous avons récupérer les fichiers sql et php du td.
+
+Ensuite nous avons modifié nos configurations de ports pour qu'on bind tout correctement
+
+ensuite on a utilisé la commande
+docker build -t runner
+pour build notre image
+et après un docker compose up 
+Nous asommes allés sur l'interface php my admin pour se connecter et ajouter le contenu du fichier sql
+Une fois fait, nous sommes allés sur l'interface nginx et on a bien les informations qui s'affiche

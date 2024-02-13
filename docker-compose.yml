@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: lscr.io/linuxserver/nginx:latest
+    container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config:/config
+      - ./php:/config/www
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+  mariadb:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_USER: arno
+      MARIADB_PASSWORD: 1234
+      MARIADB_DATABASE: test
+    volumes:
+      - ./mariadb_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 81:80
+    environment:
+      PMA_HOST: mariadb
+      MARIADB_USER: arno
+      MARIADB_PASSWORD: 1234
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_DATABASE: test
+
